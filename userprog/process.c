@@ -179,8 +179,16 @@ process_exec (void *f_name) {
 	char *token, *save_ptr;
 	token = strtok_r(file_name, " ", &save_ptr);
 
-	char *argv[64];
+	char *argv;
 	int argc = 0;
+
+	while (token != NULL) {
+		argv[argc] = token;
+		token = strtok_r(NULL, " ", &save_ptr);
+		argc = argc + 1;
+	}
+
+
 
 	/* And then load the binary */
 	success = load (file_name, &_if);
